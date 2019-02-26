@@ -1,0 +1,4 @@
+type Query {
+  items: [ContentItem],
+  itemsByType(type: String!, limit: Int, depth: Int, order: String): [ContentItem]
+}
