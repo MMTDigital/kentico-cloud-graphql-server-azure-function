@@ -2,6 +2,8 @@
 
 A serverless GraphQL API that is bundled with Kentico Cloud content resolution.
 
+Note: you likely will need this repo also – https://github.com/MMTDigital/kentico-cloud-schema-generator-azure-function
+
 This is an Azure Function that can be deployed and used as a GraphQL API for your application. It makes sense to be pulling content from Kentico Cloud into your application, but you are not restricted to this. Consider the following diagram:
 
 ![Container Diagram](./container-diagram.png?raw=true "Container Diagram")
