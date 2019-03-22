@@ -1,25 +1,17 @@
+const environmentVariables = require('checkenv')
 const { gql, ApolloServer } = require('apollo-server-azure-functions')
 const getSchemaFromBlob = require('./get-schema-from-blob')
 
 const checkEnvironmentVariables = (context) => {
   context.log('Ensuring the necessary environment variables are present')
 
-  const {
-    AZURE_STORAGE_CONNECTION_STRING,
-    AZURE_STORAGE_CONTAINER_NAME,
-    AZURE_STORAGE_BLOB_NAME,
-    KENTICO_CLOUD_PROJECT_ID
-  } = process.env
-
-  if (
-    !AZURE_STORAGE_CONNECTION_STRING ||
-    !AZURE_STORAGE_CONTAINER_NAME ||
-    !AZURE_STORAGE_BLOB_NAME ||
-    !KENTICO_CLOUD_PROJECT_ID
-  ) {
+  try {
+    environmentVariables.check(false)
+  } catch (error) {
+    context.log.error(error)
     context.done(null, {
       status: 500,
-      body: 'Environment variables missing. Please refer to the README to ensure you have all the correct environment variables in place'
+      body: 'Environment variables missing. Please refer to the README and the env.json to ensure you have all the correct environment variables in place. More details will br provided in server the console.'
     })
   }
 }
@@ -54,8 +46,7 @@ module.exports = async (context, request) => {
       }
     })
 
-    const response = await runHandler(request, context, handler)
-    return response
+    return runHandler(request, context, handler)
   } catch (error) {
     context.log.error(error)
   }

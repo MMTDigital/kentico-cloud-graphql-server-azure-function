@@ -41,4 +41,4 @@ __pycache__/
 *.py[cod]
 *$py.class
 
-/schema/kentico-cloud-schema.graphql
+**/schema/kentico-cloud-schema.graphql

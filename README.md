@@ -10,7 +10,7 @@ This is an Azure Function that can be deployed and used as a GraphQL API for you
 
 # Getting Started
 
-1) Fork this repo
+1) Clone this repo
 2) Install latest stable version of Node and Yarn
 3) Install dependencies: `yarn`
 4) Run through the deployment process outlined below. Note, this may have already been done by your team, so check first
@@ -22,32 +22,18 @@ This is an Azure Function that can be deployed and used as a GraphQL API for you
   "Values": {
     "AzureWebJobsStorage": "",
     "AZURE_STORAGE_CONNECTION_STRING": "",
-    "AZURE_STORAGE_CONTAINER_NAME": "kentico-cloud-schema",
-    "AZURE_STORAGE_BLOB_NAME": "kentico-cloud-schema.graphql",
-    "FUNCTIONS_WORKER_RUNTIME": "node",
-    "KENTICO_CLOUD_PROJECT_ID": ""
+    "KENTICO_CLOUD_PROJECT_ID": "",
+    "FUNCTIONS_WORKER_RUNTIME": "",
+    "SCHEMA_STORAGE_CONTAINER_NAME": "",
+    "AZURE_STORAGE_BLOB_NAME": "",
   }
 }
 ```
 
 **Do not commit this file to the repo**
 
-6) Populate the environment values. Here is a small explanation of what each one is:
-
-- `AzureWebJobsStorage` – A connection string to an Azure Storage resource. This is purely for the function to store in-memory things. This can be obtained after you have followed the deploy steps outlined below.
-
-- `AZURE_STORAGE_CONNECTION_STRING` – A connection string to an Azure Storage resource. This must be the storage that holds your Kentico Cloud Schema. This is expected to be _different_ to the value of `AzureWebJobsStorage`.
-
-- `AZURE_STORAGE_CONTAINER_NAME` – The name of the storage container that you chose to publish your Kentico Cloud Schema to. If you leave the defaults of this repo and the `kentico-cloud-schema-generator-azure-function` repo, this should just work.
-
-- `AZURE_STORAGE_BLOB_NAME` – The name of the storage blob that you chose to publish your Kentico Cloud Schema to. If you leave the defaults of this repo and the `kentico-cloud-schema-generator-azure-function` repo, this should just work.
-
--  `FUNCTIONS_WORKER_RUNTIME` – The runtime of the function. This must be set to `"node"`
-
--  `KENTICO_CLOUD_PROJECT_ID` – Your public Kentico Cloud API key. This should match the API key outlined in the the `kentico-cloud-schema-generator-azure-function` repo
-
+6) Populate the environment values. Check the env.json for a description of each.
 7) Finally, you can run and develop locally with `yarn start`
-
 
 ### Advanced Local Development
 
@@ -85,4 +71,3 @@ Once you have set up a Function App within Azure, a Storage resource will be aut
 - Copy the connection string in `key1`
 
 **Note: this connection string is confidential. It should not be checked into a repo and ideally not shared insecurely**
-
