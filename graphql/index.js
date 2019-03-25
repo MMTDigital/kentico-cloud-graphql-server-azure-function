@@ -1,9 +1,9 @@
 const environmentVariables = require('checkenv')
 const { gql, ApolloServer } = require('apollo-server-azure-functions')
-const getSchemaFromBlob = require('./get-schema-from-blob')
+const getSchemaFromBlob = require('./getSchemaFromBlob')
 
 const checkEnvironmentVariables = (context) => {
-  context.log('Ensuring the necessary environment variables are present')
+  context.log('Ensuring the necessary environment variables are present...')
 
   try {
     environmentVariables.check(false)
@@ -23,12 +23,19 @@ const runHandler = (request, context, handler) => {
   })
 }
 
+const requireUncached = (module) => {
+  delete require.cache[require.resolve(module)]
+  return require(module)
+}
+
 module.exports = async (context, request) => {
+  context.log('API request received...')
+
   try {
     await checkEnvironmentVariables(context)
     await getSchemaFromBlob(context)
 
-    const schema = require('./schema')
+    const schema = requireUncached('./schema')
     const resolvers = require('./resolvers')
 
     const typeDefs = [ schema ]
